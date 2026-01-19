@@ -6,13 +6,18 @@ extern "C" {
 #endif
 
 
-void rcc_enable_gpioa();
-void rcc_enable_gpiob();
-void rcc_enable_gpioc();
-void rcc_enable_gpiod();
+/*
+**
+**
+**
+**
+*/
 
+#include <stdint.h>
+#include "stm32g474xx.h"
 
-
+void rcc_Init();
+void rcc_Enable_gpio(GPIO_typedef *port);
 
 
 
@@ -48,3 +53,4 @@ void rcc_enable_gpiod();
 #ifdef __cplusplus
 }
 #endif
+

@@ -1,32 +1,15 @@
-//
-//
-//
-#include "stm32g474xx.h"
 #include "rcc.h"
 
-//
-//
-//
-//
-//
 
 
-void rcc_enable_gpioa() {
-    RCC ->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
+void rcc_Init() {
+
 }
 
-void rcc_enable_gpiob() {
-    RCC ->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
-}
-
-void rcc_enable_gpioc() {
-    RCC ->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;
-}
-
-void rcc_enable_gpiod() {
-    RCC ->AHB2ENR |= RCC_AHB2ENR_GPIODEN;
-}
-
-void rcc_enable_gpioe() {
-    RCC ->AHB2ENR |= RCC_AHB2ENR_GPIOEEN;
+void rcc_Enable_gpio(GPIO_Typedef *port) {
+    if (port == GPIOA) RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
+    else if (port == GPIOB) RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
+    else if (port == GPIOC) RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;
+    else if (port == GPIOD) RCC->AHB2ENR |= RCC_AHB2ENR_GPIODEN;
+    else if (port == GPIOE) RCC->AHB2ENR |= RCC_AHB2ENR_GPIOEEN;
 }
