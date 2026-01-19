@@ -62,10 +62,38 @@ void GPIOA_ReadOutput() {
 }
 
 // Bit Set and Reset Register
-void GPIOA_High(uint8_t pin) {
-
+void GPIOA_High(GPIO_Typedef *port, uint8_t pin) {
+    if (port == GPIOA) {
+        GPIOA->BSRR = (0x01 << pin);
+    }
+    else if (port == GPIOB) {
+        GPIOB->BSRR = (0x01 << pin);
+    }
+    else if (port == GPIOB) {
+        GPIOC->BSRR = (0x01 << pin);
+    }
+    else if (port == GPIOB) {
+        GPIOD->BSRR = (0x01 << pin);
+    }
+    else if (port == GPIOB) {
+        GPIOE->BSRR = (0x01 << pin);
+    }
 }
 
-void GPIOA_Low(uint8_t pin) {
-
+void GPIOA_Low(GPIO_Typedef *port, uint8_t pin) {
+    if (port == GPIOA) {
+        GPIOA->BSRR = (0x01 << (pin + 16));
+    }
+    else if (port == GPIOB) {
+        GPIOB->BSRR = (0x01 << (pin + 16));
+    }
+    else if (port == GPIOB) {
+        GPIOC->BSRR = (0x01 << (pin + 16));
+    }
+    else if (port == GPIOB) {
+        GPIOD->BSRR = (0x01 << (pin + 16));
+    }
+    else if (port == GPIOB) {
+        GPIOE->BSRR = (0x01 << (pin + 16));
+    }
 }
