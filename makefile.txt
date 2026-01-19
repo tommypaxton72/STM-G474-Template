@@ -48,13 +48,14 @@ FLOAT_ABI = -mfloat-abi=hard
 # ================================
 
 CFLAGS = \
-    $(CPU) $(FPU) $(FLOAT_ABI) \
-    -mthumb \                 # Cortex-M uses Thumb instruction set
-    -O0 \                     # No optimization (best for debugging)
-    -g \                      # Generate debug symbols
-    -Wall \                   # Enable common warnings
-    -ffunction-sections \     # Put each function in its own section
-    -fdata-sections           # Put each variable in its own section
+	$(CPU) $(FPU) $(FLOAT_ABI) \
+	-mthumb \
+	-O0 \
+	-g \
+	-Wall \
+	-ffunction-sections \
+	-fdata-sections \
+	$(INCLUDES)
 
 # Why sections matter:
 # → allows the linker to REMOVE unused code
@@ -66,11 +67,10 @@ CFLAGS = \
 # ================================
 
 LDFLAGS = \
-    $(CPU) $(FPU) $(FLOAT_ABI) \
-    -mthumb \
-    -T linker/STM32G474RETX_FLASH.ld \  # Memory layout
-    -T linker/STM32G474RETX_RAM.ld
-    -Wl,--gc-sections                # Remove unused sections
+	$(CPU) $(FPU) $(FLOAT_ABI) \
+	-mthumb \
+	-T linker/STM32G474RETX_FLASH.ld \
+	-Wl,--gc-sections
 
 # The linker script decides:
 # - Flash start address
@@ -84,9 +84,10 @@ LDFLAGS = \
 # ================================
 
 INCLUDES = \
-    -Icmsis/core \                   # CMSIS core headers (core_cm4.h)
-    -Icmsis/device/stm32g4xx \       # STM32G4 device headers
-    -Isrc/drivers                    # Your project headers
+	-Icmsis \
+	-Icmsis/Include \
+	-Icmsis/Device/system_stm32G4xx \
+	-Isrc/drivers
 
 
 # ================================
@@ -94,11 +95,11 @@ INCLUDES = \
 # ================================
 
 SRCS = \
-    src/main.c \
-    src/drivers/rcc.c
-    src/drivers/gpio.c \
-    cmsis/device/stm32g4xx/system_stm32g4xx.c \
-    startup/startup_stm32g474xx.s \
+	src/main.c \
+	src/drivers/rcc.c \
+	src/drivers/gpio.c \
+	cmsis/device/stm32g4xx/system_stm32g4xx.c \
+	startup/startup_stm32g474xx.s
 
 
 # main.c → your code
