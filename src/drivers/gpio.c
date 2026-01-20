@@ -5,13 +5,12 @@
 **
 */
 
-
 #include "gpio.h"
 
 
 
 // Mode Register
-void GPIO_SetMode(GPIO_Typedef *port, uint8_t gpio_pin, gpio_mode mode) {
+void GPIO_SetMode(GPIO_TypeDef *port, uint8_t gpio_pin, gpio_mode mode) {
     if (port == GPIOA) {
         GPIOA->MODER &= ~(0x3 << (gpio_pin * 2)); // Set all to 0
         GPIOA->MODER |= (mode << (gpio_pin * 2)); // Set to mode
@@ -35,65 +34,70 @@ void GPIO_SetMode(GPIO_Typedef *port, uint8_t gpio_pin, gpio_mode mode) {
 }
 
 // Output Type
-void GPIOA_SetOutputType() {
+void GPIO_SetOutputType() {
 
 }
 
 
 // Output Speed
-void GPIOA_SetOutputSpeed() {
+void GPIO_SetOutputSpeed() {
 
 }
 
 
 // Pull up/down
-void GPIOA_SetResistor() {
-
+void GPIO_SetPull(GPIO_TypeDef *port, uint8_t pin, pupd_mode pupd) {
+    port->PUPDR &= ~(0x3 << (pin * 2));
+    port->PUPDR |= (pupd << (pin * 2));
 }
 
 // Input Data Register
-void GPIOA_ReadInput() {
-
+// Bits 0-15 read only
+// Each bit corresponds to a pin if the pin exists
+bool GPIO_ReadInput(GPIO_TypeDef *port, uint8_t pin) {
+    return (port->IDR & (1 << pin)) != 0;
 }
 
 // Output Data Register
-void GPIOA_ReadOutput() {
+void GPIO_ReadOutput() {
 
 }
 
 // Bit Set and Reset Register
-void GPIOA_High(GPIO_Typedef *port, uint8_t pin) {
+//
+// Can just use port->BSRR
+void GPIO_High(GPIO_TypeDef *port, uint8_t pin) {
     if (port == GPIOA) {
-        GPIOA->BSRR = (0x01 << pin);
+        GPIOA->BSRR = (1U << pin);
     }
     else if (port == GPIOB) {
-        GPIOB->BSRR = (0x01 << pin);
+        GPIOB->BSRR = (1U << pin);
     }
-    else if (port == GPIOB) {
-        GPIOC->BSRR = (0x01 << pin);
+    else if (port == GPIOC) {
+        GPIOC->BSRR = (1U << pin);
     }
-    else if (port == GPIOB) {
-        GPIOD->BSRR = (0x01 << pin);
+    else if (port == GPIOD) {
+        GPIOD->BSRR = (1U << pin);
     }
-    else if (port == GPIOB) {
-        GPIOE->BSRR = (0x01 << pin);
+    else if (port == GPIOE) {
+        GPIOE->BSRR = (1U << pin);
     }
 }
 
-void GPIOA_Low(GPIO_Typedef *port, uint8_t pin) {
+void GPIO_Low(GPIO_TypeDef *port, uint8_t pin) {
     if (port == GPIOA) {
-        GPIOA->BSRR = (0x01 << (pin + 16));
+        GPIOA->BSRR = (1U << (pin + 16));
     }
     else if (port == GPIOB) {
-        GPIOB->BSRR = (0x01 << (pin + 16));
+        GPIOB->BSRR = (1U << (pin + 16));
     }
-    else if (port == GPIOB) {
-        GPIOC->BSRR = (0x01 << (pin + 16));
+    else if (port == GPIOC) {
+        GPIOC->BSRR = (1U << (pin + 16));
     }
-    else if (port == GPIOB) {
-        GPIOD->BSRR = (0x01 << (pin + 16));
+    else if (port == GPIOD) {
+        GPIOD->BSRR = (1U << (pin + 16));
     }
-    else if (port == GPIOB) {
-        GPIOE->BSRR = (0x01 << (pin + 16));
+    else if (port == GPIOE) {
+        GPIOE->BSRR = (1U << (pin + 16));
     }
 }

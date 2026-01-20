@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug STM32G474",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/firmware.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "device": "STM32G474RE",
+            "interface": "swd",
+            "runToEntryPoint": "main",
+            "preLaunchTask": "Build",
+            "servertype": "openocd",
+            "serverpath": "C:/msys64/mingw64/bin/openocd.exe",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32g4x.cfg"
+            ],
+            "svdFile": "${workspaceFolder}/STM32G474.svd"
+        }
+    ]
+}

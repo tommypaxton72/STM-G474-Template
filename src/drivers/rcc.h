@@ -1,6 +1,10 @@
 #include <stdint.h>
 #include "stm32g474xx.h"
 
+#ifndef RCC_H
+#define RCC_H
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -15,7 +19,7 @@ extern "C" {
 
 
 void rcc_Init();
-void rcc_Enable_gpio(GPIO_typedef *port);
+void rcc_Enable_gpio(GPIO_TypeDef *port);
 
 
 
@@ -52,3 +56,4 @@ void rcc_Enable_gpio(GPIO_typedef *port);
 }
 #endif
 
+#endif

@@ -6,7 +6,7 @@ void rcc_Init() {
 
 }
 
-void rcc_Enable_gpio(GPIO_Typedef *port) {
+void rcc_Enable_gpio(GPIO_TypeDef *port) {
     if (port == GPIOA) RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
     else if (port == GPIOB) RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
     else if (port == GPIOC) RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;

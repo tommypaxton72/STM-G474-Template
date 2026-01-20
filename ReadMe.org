@@ -1,0 +1,7 @@
+* Personal Bare Metal Project using an STM32G474RE Nucleo board
+
+** Notes
+ * Some reason i cant seem to get the button to work im seeing it output high but pressing it doesnt change IDR value.
+ * SVD file for using VSCode Debug
+ * Also have it setup in EMACS
+ * Need to fix/learn more about makefile

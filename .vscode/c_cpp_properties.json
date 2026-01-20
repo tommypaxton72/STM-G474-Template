@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "STM32G474",
+            "compilerPath": "C:/msys64/mingw64/bin/arm-none-eabi-gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/cmsis",
+                "${workspaceFolder}/cmsis/Device",
+                "${workspaceFolder}/src"
+            ],
+            "defines": ["STM32G474xx"]
+        }
+    ],
+    "version": 4
+}
