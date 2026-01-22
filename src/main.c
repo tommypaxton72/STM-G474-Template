@@ -1,4 +1,3 @@
-#define STM32G474xx
 #include <stdint.h>
 #include "stm32g4xx.h"
 #include "system_stm32g4xx.h"
@@ -29,10 +28,22 @@ int main(void) {
         //GPIO_Low(GPIOA, 5);  // Set pin 5 low
         //Delay(50000);
         // User button toggle
-        if (!GPIO_ReadInput(GPIOC, 13)) { // Button is normally open high
-            GPIO_High(GPIOA, 5);
-        } else {
-            GPIO_Low(GPIOA, 5);
+        GPIO_Low(GPIOA, 5);
+        GPIO_High(GPIOA, 6);
+
+        if (GPIO_ReadInput(GPIOB, 6)) {
+        GPIO_High(GPIOA, 5);
         }
-    }
+
+        if (GPIO_ReadInput(GPIOA, 9)) {
+        GPIO_High(GPIOA, 5);
+        }
+
+        if (GPIO_ReadInput(GPIOC, 7)) {
+        GPIO_High(GPIOA, 5);
+        }
+        if (GPIO_ReadInput(GPIOC, 13) == true) {
+        GPIO_High(GPIOA, 5);
+        }
+    }  
 }

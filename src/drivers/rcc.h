@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "stm32g474xx.h"
+#include "stm32g4xx.h"
 
 #ifndef RCC_H
 #define RCC_H

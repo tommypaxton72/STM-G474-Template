@@ -12,8 +12,8 @@ SIZE = arm-none-eabi-size
 # Target
 # Name of file when compiled
 TARGET = firmware
-BUILDDIR = build
-
+OBJDIR = build/obj
+BINDIR = build/bin
 
 
 # MCU Architecture Flags
@@ -60,44 +60,51 @@ INCLUDES = \
 	-Isrc/drivers \
 	-Iinclude/nucleog474
 
+
+.PHONY: all clean flash debug
+
+all: $(BINDIR)/$(TARGET).elf $(BINDIR)/$(TARGET).bin
+
+
+
+# Create build directory if it doesn't exist
+$(OBJDIR) $(BINDIR):
+	mkdir -p $@
+
+
 # Object File
-OBJS = $(SRCS:.c=.o)
-OBJS := $(OBJS:.s=.o)
-
-
-
+OBJS = $(SRCS:%=$(OBJDIR)/%.o)
 
 # Recipe
-# compile to .elf and .bin
-all: $(TARGET).elf $(TARGET).bin
 
 # Compile C files
-%.o: %.c
+$(OBJDIR)/%.c.o: %.c | $(OBJDIR)
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Assemble startup / assembly files
-%.o: %.s
+# Assemble startup files
+$(OBJDIR)/%.s.o: %.s | $(OBJDIR)
+	mkdir -p $(dir $@)
 	$(CC) $(CPU) $(FPU) $(FLOAT_ABI) -mthumb \
 	-c $< -o $@
 
-
 # Link
-$(TARGET).elf: $(OBJS)
+$(BINDIR)/$(TARGET).elf: $(OBJS) | $(BINDIR)
 	$(CC) $(OBJS) $(LDFLAGS) -o $@
 	$(SIZE) $@
 
 
 # Convert .elf to .bin
-$(TARGET).bin: $(TARGET).elf
+$(BINDIR)/$(TARGET).bin: $(BINDIR)/$(TARGET).elf
 	$(OBJCOPY) -O binary $< $@
 
 # Cleaning old files
 clean:
-	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin
+	rm -rf build
 
 # Flash using make flash
 flash:
-	"C:/ST/STM32CubeProg/bin/STM32_Programmer_CLI.exe" -c port=SWD -w $(TARGET).bin 0x08000000 -rst
+	"C:/ST/STM32CubeProg/bin/STM32_Programmer_CLI.exe" -c port=SWD -w $(BINDIR)/$(TARGET).bin 0x08000000 -rst
 
 
 # Debug using make debug
