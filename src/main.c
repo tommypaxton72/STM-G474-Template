@@ -42,7 +42,7 @@ int main(void) {
         if (GPIO_ReadInput(GPIOC, 7)) {
         GPIO_High(GPIOA, 5);
         }
-        if (GPIO_ReadInput(GPIOC, 13) == true) {
+        if (GPIO_ReadInput(GPIOC, 13) == 1) {
         GPIO_High(GPIOA, 5);
         }
     }  

@@ -12,7 +12,7 @@
 
 
 #ifdef __cplusplus
-extern c {
+extern C {
 #endif
 
 typedef enum {

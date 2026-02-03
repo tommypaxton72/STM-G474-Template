@@ -56,7 +56,7 @@ SRCS = \
 INCLUDES = \
 	-Icmsis \
 	-Icmsis/Include \
-	-Icmsis/device/system_stm32G4xx \
+	-Icmsis/Device/system_stm32G4xx \
 	-Isrc/drivers \
 	-Iinclude/nucleog474
 

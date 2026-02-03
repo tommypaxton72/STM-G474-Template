@@ -1,0 +1,29 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/arm-none-eabi-gcc",
+      "-mcpu=cortex-m4",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-mthumb",
+      "-O0",
+      "-g",
+      "-Wall",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Icmsis",
+      "-Icmsis/Include",
+      "-Icmsis/Device/system_stm32G4xx",
+      "-Isrc/drivers",
+      "-Iinclude/nucleog474",
+      "-DSTM32G474xx",
+      "-c",
+      "-o",
+      "build/obj/src/main.c.o",
+      "src/main.c"
+    ],
+    "directory": "/home/tommy/projects/STM-G474-Template",
+    "file": "/home/tommy/projects/STM-G474-Template/src/main.c",
+    "output": "/home/tommy/projects/STM-G474-Template/build/obj/src/main.c.o"
+  }
+]
